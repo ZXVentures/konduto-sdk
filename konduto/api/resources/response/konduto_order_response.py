@@ -79,6 +79,30 @@ class KondutoNavigation:
 
 
 @dataclass
+class KondutoTriggeredRules:
+    decision: str
+    analysis_type: str
+    name: str
+    id: int
+    priority: int
+
+    @property
+    def to_dict(self):
+        return asdict(self)
+
+
+@dataclass
+class KondutoTriggeredDecisionList:
+    decision: str
+    trigger: str
+    type: str
+
+    @property
+    def to_dict(self):
+        return asdict(self)
+
+
+@dataclass
 class KondutoOrderResponse:
     id: str
     score: float
@@ -105,6 +129,8 @@ class KondutoOrderResponse:
     messages_exchanged: Optional[int] = None
     purchased_at: Optional[datetime] = None
     seller: Optional[KondutoSeller] = None
+    triggered_rules: Optional[List[KondutoTriggeredRules]] = None
+    triggered_decision_list: Optional[List[KondutoTriggeredDecisionList]] = None
 
     @property
     def to_dict(self):
